@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
+import gpt4Vision from "./gpt4Vision";
 
 export default function Cam() {
   const [image, setImage] = useState<string | null>(null);
