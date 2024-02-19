@@ -35,20 +35,38 @@ export default function Cam() {
         canvas.toBlob((blob) => {
           if (blob) {
             setImage(URL.createObjectURL(blob));
+            sendPhoto(URL.createObjectURL(blob));
           }
         }, "image/jpeg");
       }
     }
   };
 
+  const sendPhoto = async (photo: string) => {
+    const res = await fetch("/api/gpt4", {
+      method: "POST",
+      body: JSON.stringify({ photo }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
   return (
     <>
       <video ref={videoPlayerRef} id="player" autoPlay></video>
       <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
-      <button onClick={handleCapture} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-full">
+      <button
+        onClick={handleCapture}
+        className="rounded-full bg-blue-500 px-2 py-2 font-bold text-white hover:bg-blue-700"
+      >
         Click here to capture
       </button>
-      {/*preview, remove for production*/image && <Image src={image} width={500} height={500} alt="Captured" />/*preview, remove for production*/}
+      {
+        /*preview, remove for production*/ image && (
+          <Image src={image} width={500} height={500} alt="Captured" />
+        ) /*preview, remove for production*/
+      }
     </>
   );
 }

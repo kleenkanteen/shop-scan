@@ -1,12 +1,11 @@
 import OpenAI from "openai";
 import Image from "next/image";
 
-const fs = require('fs');
-const https = require('https');
+const fs = require("fs");
+const https = require("https");
 
-
-function encodeImage(imagePath) {
-  return fs.readFileSync(imagePath, { encoding: 'base64' });
+function encodeImage(imagePath: any) {
+  return fs.readFileSync(imagePath, { encoding: "base64" });
 }
 
 const openai = new OpenAI();
@@ -15,51 +14,51 @@ const imagePath = Image;
 const base64Image = encodeImage(imagePath);
 
 const data = JSON.stringify({
-  "model": "gpt-4-vision-preview",
-  "messages": [
+  model: "gpt-4-vision-preview",
+  messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "What’s in this image?"
+          type: "text",
+          text: "What’s in this image?",
         },
         {
-          "type": "image_url",
-          "image_url": {
-            "url": `data:image/jpeg;base64,${base64Image}`
-          }
-        }
-      ]
-    }
+          type: "image_url",
+          image_url: {
+            url: `data:image/jpeg;base64,${base64Image}`,
+          },
+        },
+      ],
+    },
   ],
-  "max_tokens": 300
+  max_tokens: 300,
 });
 
 const options = {
-  hostname: 'api.openai.com',
-  path: '/v1/chat/completions',
-  method: 'POST',
+  hostname: "api.openai.com",
+  path: "/v1/chat/completions",
+  method: "POST",
   headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer YOUR_OPENAI_API_KEY`,
-    'Content-Length': data.length
-  }
+    "Content-Type": "application/json",
+    Authorization: `Bearer YOUR_OPENAI_API_KEY`,
+    "Content-Length": data.length,
+  },
 };
 
-const req = https.request(options, (res) => {
-  let responseBody = '';
+const req = https.request(options, (res: any) => {
+  let responseBody = "";
 
-  res.on('data', (chunk) => {
+  res.on("data", (chunk: any) => {
     responseBody += chunk;
   });
 
-  res.on('end', () => {
+  res.on("end", () => {
     console.log(JSON.parse(responseBody));
   });
 });
 
-req.on('error', (error) => {
+req.on("error", (error: any) => {
   console.error(error);
 });
 
@@ -88,5 +87,6 @@ req.end();
 //   });
 //   console.log(response.choices[0]);
 // }
+async function gpt4Vision() {}
 
 export default gpt4Vision();
