@@ -21,7 +21,7 @@ export default function Cam() {
       }
     };
 
-    initializeMedia();
+    initializeMedia().then(() => {}).catch(err => console.error(err));
   }, []);
 
   const handleCapture = () => {
