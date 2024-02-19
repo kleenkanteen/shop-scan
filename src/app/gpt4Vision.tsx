@@ -1,7 +1,8 @@
 import OpenAI from "openai";
+import Image from "next/image";
 
 const openai = new OpenAI();
-const imagePath = ""
+const imagePath = Image
 
 
 async function gpt4Vision() {
