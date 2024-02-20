@@ -35,21 +35,34 @@ export default function Cam() {
         canvas.toBlob((blob) => {
           if (blob) {
             setImage(URL.createObjectURL(blob));
-            sendPhoto(URL.createObjectURL(blob));
+            canvas.toBlob((blob) => {
+              if (blob) {
+                setImage(URL.createObjectURL(blob));
+                sendPhoto(blob); // Pass the blob directly
+              }
+            }, "image/jpeg");
           }
         }, "image/jpeg");
       }
     }
   };
 
-  const sendPhoto = async (photo: string) => {
-    const res = await fetch("/api/gpt4", {
-      method: "POST",
-      body: JSON.stringify({ photo }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  const sendPhoto = async (photoBlob: Blob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(photoBlob);
+    reader.onloadend = async () => {
+      const base64data = reader.result;
+      if (typeof base64data === "string") {
+        const base64Photo = base64data.split(",")[1];
+        await fetch("/api/gpt4", {
+          method: "POST",
+          body: JSON.stringify({ photo: base64Photo }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+    };
   };
 
   return (
