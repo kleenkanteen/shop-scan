@@ -27,4 +27,20 @@ In the upper right, select the three dots > Save & Share > Install Shop Scan...
 ## User Setup
 
 Items must first be added to the inventory through the inventory management screen. Items should then
-be able to be added to the shopping cart via the scan functionality. 
+be able to be added to the shopping cart via the scan functionality.
+
+## Developers
+
+Sabih S- Developer & idea creation for Shop Scan
+[Github](https://github.com/kleenkanteen) |
+[LinkedIn](https://www.linkedin.com/in/sabihsarowar/) |
+[Portfolio](https://www.sabih.me/)
+
+Slavi Ivanov Karaslavov- Developer
+[Github](https://github.com/Slaviiiii) |
+[Portfolio](https://portfolio-website-one-steel.vercel.app/)
+
+Matt Hutter- Developer
+[Github](https://github.com/Sparky338) |
+[LinkedIn](https://www.linkedin.com/in/matt-hutter-2a6620173/) |
+[Portfolio](https://sparky338.github.io/)
