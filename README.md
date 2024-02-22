@@ -20,5 +20,5 @@ Go to the website [Shop Scan](https://shop-scan.vercel.app/) and install the pag
 In the address bar, click the monitor icon with the down arrow and click Install.
 ![Address-Bar-install-screenshot](./Readme-Assets/Shop-Scan-address-bar-install.png)
 
-In the upper right, select the three dots > Save & Share > Install Shope Scan...
+In the upper right, select the three dots > Save & Share > Install Shop Scan...
 ![Menu-install-screenshot](Readme-Assets/Shop-Scan-menu-install.png)
