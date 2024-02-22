@@ -22,3 +22,9 @@ In the address bar, click the monitor icon with the down arrow and click Install
 
 In the upper right, select the three dots > Save & Share > Install Shop Scan...
 ![Menu-install-screenshot](Readme-Assets/Shop-Scan-menu-install.png)
+
+
+## User Setup
+
+Items must first be added to the inventory through the inventory management screen. Items should then
+be able to be added to the shopping cart via the scan functionality. 
