@@ -56,7 +56,7 @@ export default function Cam() {
         const base64Photo = base64data.split(",")[1];
         await fetch("/api/gpt4", {
           method: "POST",
-          body: JSON.stringify({ photo: base64Photo }),
+          body: JSON.stringify({ photo: base64data }),
           headers: {
             "Content-Type": "application/json",
           },
