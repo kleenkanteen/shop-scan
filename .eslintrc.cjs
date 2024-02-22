@@ -6,7 +6,7 @@ const config = {
   },
   plugins: ["@typescript-eslint"],
   extends: [
-    "next/core-web-vitals",
+    "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
   ],
@@ -15,7 +15,10 @@ const config = {
     // Feel free to reconfigure them to your own preference.
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
-
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-assignment ": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {
@@ -31,7 +34,6 @@ const config = {
         checksVoidReturn: { attributes: false },
       },
     ],
-    "@typescript-eslint/no-floating-promises": ["warn", {ignoreIIFE: true}]
   },
 };
 

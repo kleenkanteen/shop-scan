@@ -1,17 +1,24 @@
 import Link from "next/link";
 import { buttonVariants } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { supabase } from "../utils/supabase/client";
+
+type Inventory = {
+  name: string;
+  price: number;
+  stock: number;
+};
 
 export default async function Inventory() {
-  // const { data: inventory } = await supabase.from("inventory").select();
-  const inventory: any = [];
+  const { data: inventory } = await supabase.from("inventory").select();
+
   return (
     <div className="flex h-full flex-col items-center justify-evenly">
       <h1 className="text-5xl font-medium">Inventory</h1>
 
-      {inventory.length > 0 ? (
+      {inventory!.length > 0 ? (
         inventory?.map((inventory: any) => (
-          <Card className="w-[350px] hover:bg-slate-50">
+          <Card key={inventory.name} className="w-[350px] hover:bg-slate-50">
             <CardHeader>
               <CardTitle className="text-2xl font-bold">
                 {inventory.name}
