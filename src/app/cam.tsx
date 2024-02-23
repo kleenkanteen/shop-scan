@@ -68,6 +68,11 @@ export default function Cam() {
 
         let res = await response.json();
 
+        if (res.status === 500) {
+          setError("There is no product called like that!");
+          return;
+        }
+
         const { data: inventories } = await supabase.from("inventory").select();
 
         const product = inventories?.find(
@@ -80,23 +85,36 @@ export default function Cam() {
           redirect("/");
         }
 
-        setError(`There is no product called like that!`);
+        setError("There is no product like the one in your image!");
       }
     };
   };
 
   return (
-    <div className="w-full">
+    <div className="flex flex-col items-center">
       <video ref={videoPlayerRef} id="player" autoPlay></video>
       <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
       <button
         onClick={handleCapture}
-        className="mx-auto rounded-full bg-blue-500 px-2 py-2 font-bold text-white hover:bg-blue-700"
+        className="mx-auto w-1/3 rounded-full bg-blue-500 px-2 py-2 font-bold text-white hover:bg-blue-700"
       >
         Click here to capture
       </button>
-      <div className="p-10">{error}</div>
-      {image && <Image src={image} width={1000} height={1000} alt="Captured" />}
+      {error !== "" ? (
+        <div className="mx-auto my-5 w-3/4 rounded-lg bg-red-400 p-2 text-center text-white">
+          {error}
+        </div>
+      ) : null}
+
+      {image && (
+        <Image
+          src={image}
+          width={1000}
+          height={1000}
+          alt="Captured"
+          className="px-5"
+        />
+      )}
     </div>
   );
 }

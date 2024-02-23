@@ -35,11 +35,11 @@ export async function POST(req: NextRequest) {
     });
     description = response.choices[0]?.message;
   } catch (error: any) {
-    return new NextResponse("not alright", {
-      status: 500,
-    });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 },
+    );
   }
-  console.log(description);
 
   return NextResponse.json({ description: description, status: 200 });
 }

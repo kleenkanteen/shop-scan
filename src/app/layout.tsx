@@ -138,8 +138,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <div className="h-4/5">{children}</div>
-        <div className="fixed h-1/5 w-full p-8">
-          {" "}
+        <div className="fixed h-1/5 w-full p-8 text-primary">
           {/*Footer*/}
           <div className="flex h-full cursor-pointer flex-row items-center justify-evenly rounded-2xl border-4 border-black">
             <Link href="/">
