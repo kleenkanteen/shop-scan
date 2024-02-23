@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
+import { supabase } from "./utils/supabase/client";
+import { redirect } from "next/navigation";
 
 export default function Cam() {
   const [image, setImage] = useState<string | null>(null);
+  const [error, setError] = useState("");
   const videoPlayerRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -35,26 +37,66 @@ export default function Cam() {
         canvas.toBlob((blob) => {
           if (blob) {
             setImage(URL.createObjectURL(blob));
+            canvas.toBlob((blob) => {
+              if (blob) {
+                setImage(URL.createObjectURL(blob));
+                sendPhoto(blob);
+              }
+            }, "image/jpeg");
           }
         }, "image/jpeg");
       }
     }
   };
 
+  const sendPhoto = async (photoBlob: Blob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(photoBlob);
+    reader.onloadend = async () => {
+      const base64data = reader.result;
+      if (typeof base64data === "string") {
+        const base64Photo = base64data.split(",")[1];
+        const response: any = await fetch("/api/gpt4-vision", {
+          method: "POST",
+          body: JSON.stringify({
+            photo: base64Photo,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        let res = await response.json();
+
+        const { data: inventories } = await supabase.from("inventory").select();
+
+        const product = inventories?.find(
+          (prod) => prod.name === res.description.content,
+        );
+
+        if (product) {
+          await supabase.from("cart").insert(product);
+          setError("");
+          redirect("/");
+        }
+
+        setError(`There is no product called like that!`);
+      }
+    };
+  };
+
   return (
-    <>
+    <div className="w-full">
       <video ref={videoPlayerRef} id="player" autoPlay></video>
       <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
-      <div className="flex flex-row items-center justify-center">
-        <button
-          onClick={handleCapture}
-          className="rounded-2xl px-2 py-2 font-bold border-4 border-black"
-        >
-          Click here to capture
-        </button>
-      </div>
-
-      {image && <Image src={image} width={500} height={500} alt="Captured" />}
-    </>
+      <button
+        onClick={handleCapture}
+        className="mx-auto rounded-full bg-blue-500 px-2 py-2 font-bold text-white hover:bg-blue-700"
+      >
+        Click here to capture
+      </button>
+      <div className="p-10">{error}</div>
+      {image && <Image src={image} width={1000} height={1000} alt="Captured" />}
+    </div>
   );
 }
