@@ -25,7 +25,7 @@ export default function InventoryItems() {
 
   const fetchItems = async () => {
     const { data: inventory } = await supabase.from("inventory").select();
-    setInventory(inventory);
+    if (inventory) setInventory(inventory);
   };
 
   const handleDelete = async (name) => {
