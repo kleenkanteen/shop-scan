@@ -8,17 +8,17 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 });
 
 /** @type {import("next").NextConfig} */
-
 module.exports = withPWA({
-  headers: () => [
-  {
-    source: '/:path*',
-    headers: [
-      {
-        key: 'Cache-Control',
-        value: 'no-store',
-      },
-    ],
-  },
-],
+  headers: () => Promise.resolve([
+    {
+      source: '/:path*',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'no-store',
+        },
+      ],
+    },
+  ]),
 });
+

@@ -1,4 +1,5 @@
 "use client";
+
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +15,7 @@ import {
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { supabase } from "~/app/utils/supabase/client";
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   name: z
@@ -38,9 +40,10 @@ const AddForm = () => {
     },
   });
 
+  const router = useRouter();
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const response = await supabase.from("inventory").insert(values);
-    return response;
+    router.push("/inventory");
   }
 
   return (
