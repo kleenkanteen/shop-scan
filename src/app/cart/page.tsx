@@ -14,7 +14,7 @@ type InventoryItem = {
   stock: number;
 };
 
-export default function InventoryItems() {
+export default function Cart() {
   const [inventory, setInventory] = useState<InventoryItem[]>([])
 
   useEffect(() => {
@@ -40,13 +40,8 @@ export default function InventoryItems() {
 
   return (
     <div className="h-full flex flex-col items-center justify-evenly pt-16 gap-16">
-      <div className="flex flex-col gap-16">
-        <h1 className="text-5xl font-medium underline decoration-wavy underline-offset-8">Inventory</h1>
-        <div className="flex justify-center">
-          <Link href={"/inventory/add-product"} className={buttonVariants()}>
-            Add new product
-          </Link>
-        </div>
+      <div className="flex flex-col gap-8">
+        <h1 className="text-5xl font-medium underline decoration-wavy underline-offset-8">Cart</h1>
       </div>
       <div className="flex flex-col gap-8 overflow-y-auto">
         {inventory && inventory.length >   0 ? (

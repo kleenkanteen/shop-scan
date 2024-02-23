@@ -45,15 +45,14 @@ export default function Cam() {
     <>
       <video ref={videoPlayerRef} id="player" autoPlay></video>
       <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
-      <button
-        onClick={handleCapture}
-        className="rounded-full bg-blue-500 px-2 py-2 font-bold text-white hover:bg-blue-700"
-      >
-        Click here to capture
-      </button>
-      <Link href="/inventory" className="ml-5">
-        My Inventory
-      </Link>
+      <div className="flex flex-row items-center justify-center">
+        <button
+          onClick={handleCapture}
+          className="rounded-2xl px-2 py-2 font-bold border-4 border-black"
+        >
+          Click here to capture
+        </button>
+      </div>
 
       {image && <Image src={image} width={500} height={500} alt="Captured" />}
     </>
