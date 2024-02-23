@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 
 export default function Cam() {
@@ -44,9 +45,16 @@ export default function Cam() {
     <>
       <video ref={videoPlayerRef} id="player" autoPlay></video>
       <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
-      <button onClick={handleCapture} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-full">
+      <button
+        onClick={handleCapture}
+        className="rounded-full bg-blue-500 px-2 py-2 font-bold text-white hover:bg-blue-700"
+      >
         Click here to capture
       </button>
+      <Link href="/inventory" className="ml-5">
+        My Inventory
+      </Link>
+
       {image && <Image src={image} width={500} height={500} alt="Captured" />}
     </>
   );
