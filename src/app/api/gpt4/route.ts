@@ -8,6 +8,8 @@ const openai = new OpenAI({
 export async function POST(req: NextRequest) {
   const { photo } = await req.json();
 
+  let description: any = "";
+
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4-vision-preview",
@@ -30,9 +32,12 @@ export async function POST(req: NextRequest) {
       ],
       max_tokens: 300,
     });
+    description = response.choices[0]?.message;
   } catch (error: any) {
-    return new NextResponse("not alright");
+    return new NextResponse("not alright", {
+      status: 500,
+    });
   }
 
-  return new NextResponse("alright");
+  return NextResponse.json({ description: description, status: 200 });
 }
