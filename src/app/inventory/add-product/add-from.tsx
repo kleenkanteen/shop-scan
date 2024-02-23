@@ -42,7 +42,7 @@ const AddForm = () => {
 
   const router = useRouter();
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const response = await supabase.from("inventory").insert(values);
+    await supabase.from("inventory").insert(values);
     router.push("/inventory");
   }
 

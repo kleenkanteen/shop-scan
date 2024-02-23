@@ -15,7 +15,7 @@ type InventoryItem = {
 };
 
 export default function InventoryItems() {
-  let [inventory, setInventory] = useState<InventoryItem[]>([])
+  const [inventory, setInventory] = useState<InventoryItem[]>([])
 
   useEffect(() => {
       fetchItems();
