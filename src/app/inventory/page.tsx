@@ -9,11 +9,9 @@ import Link from "next/link";
 import { buttonVariants } from "~/components/ui/button";
 
 type InventoryItem = {
-  item: {
-    name: string;
-    price: number;
-    stock: number;
-  };
+  name: string;
+  price: number;
+  stock: number;
 };
 
 export default function InventoryItems() {
